@@ -1,4 +1,3 @@
-
 const cards = [
 {
 rank: 'queen',
@@ -21,39 +20,38 @@ suit: 'diamonds',
 cardImage: 'images/king-of-diamonds.png'
 }
 ];
-const cardsInPlay=[];
-cardsInPlay.push('cardsID');
 
-const gameBoard=[];
+cardsInPlay=[];
 
-function checkForMatch(){
-	   let cardElement = document.createElement('img');
-	cardElement.setAttribute('src', "images/back.png");
- if (cardsInPlay[0] === cardsInPlay[1]) {
-  alert("You found a match!");
-} else {
- alert("Sorry, try again.");
-}
-//console.log(cards[cardId].cardImage);
-}
-function flipCard(){
-	this.getAttribute('attribute-we-want-to-get-goes-here');
-//console.log("User flipped " + cards[cardId].rank);
-//console.log("User flipped " + cards[cardId].cardImage);
-checkForMatch();
-}
+
 function createBoard(){
 	for (let i = 0; i < cards.length; i++) {
     let cardElement = document.createElement('img');
-     cardElement.setAttribute('src', 'images/back.png');
-     cardElement.setAttribute('data-id', i);
-     //cardElement.addEventListener("click", flipCard);
-     //document.getElementsByTagName('id').appendChild(cardElement);
-     //cardElement.textContent='game-board';
-     //cardElement.appendChild(".game-board");
-     //document.getElementsByTagName('gameBoard')[i].appendChild(cardElement);
-     document.getElementById("game-board").appendChild(cardElement); 
-     cardElement.addEventListener("click", flipCard);
+    cardElement.setAttribute('src', 'images/back.png');
+    cardElement.setAttribute('data-id',i);
+    cardElement.addEventListener("click", flipCard);
+    cardElement.id = 'game-board';
+    document.getElementsByTagName('div')[0].appendChild(cardElement);
 }
+}
+
+function checkForMatch(){
+if (cardsInPlay[0] === cardsInPlay[1]) {
+  alert("You found a match!");
+} else {
+  alert("Sorry, try again.");
+}
+}
+
+function flipCard(){
+	let cardId=this.getAttribute('data-id');
+	console.log("User flipped" + cards[cardId].rank);
+	cardsInPlay.push(cards[cardId]);
+	console.log("User flipped" + cards[cardId].cardImage);
+	console.log(cards[cardId].suit)
+	this.setAttribute('src', cards[cardId].cardImage);
+	checkForMatch();
 }
 createBoard();
+
+
