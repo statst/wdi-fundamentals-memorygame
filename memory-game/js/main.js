@@ -21,11 +21,11 @@ cardImage: 'images/king-of-diamonds.png'
 }
 ];
 
-cardsInPlay=[];
+const cardsInPlay=[];
 
 
 function createBoard(){
-	for (let i = 0; i < cards.length; i++) {
+  for (let i = 0; i < cards.length; i++) {
     let cardElement = document.createElement('img');
     cardElement.setAttribute('src', 'images/back.png');
     cardElement.setAttribute('data-id',i);
@@ -36,22 +36,30 @@ function createBoard(){
 }
 
 function checkForMatch(){
+  if ( cardsInPlay.length===2){
 if (cardsInPlay[0] === cardsInPlay[1]) {
   alert("You found a match!");
 } else {
   alert("Sorry, try again.");
 }
 }
+}
 
 function flipCard(){
-	let cardId=this.getAttribute('data-id');
-	console.log("User flipped" + cards[cardId].rank);
-	cardsInPlay.push(cards[cardId]);
-	console.log("User flipped" + cards[cardId].cardImage);
-	console.log(cards[cardId].suit)
-	this.setAttribute('src', cards[cardId].cardImage);
-	checkForMatch();
+  let cardId=this.getAttribute('data-id');
+  console.log("User flipped" + cards[cardId].rank);
+  cardsInPlay.push(cards[cardId].rank);
+  console.log("User flipped" + cards[cardId].cardImage);
+  console.log(cards[cardId].suit)
+  //this.setAttribute('src', cards[cardId].cardImage);
+  let randomCards = cards[Math.floor(Math.random()*cards.length)].cardImage;
+    console.log("random Cards =>", randomCards);
+    let cardElement = document.createElement('img');
+  this.setAttribute('src', randomCards);
+
+  checkForMatch();
 }
+
 createBoard();
 
 
